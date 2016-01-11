@@ -1,9 +1,9 @@
 {
-  "name": "JSON Formatter",
-  "version": "0.6.0",
+  "name": "ANSI Formatter",
+  "version": "0.1.0",
   "manifest_version": 2,
-  "description": "Makes JSON easy to read. Open source.",
-  "homepage_url": "https://github.com/callumlocke/json-formatter",
+  "description": "Makes ANSI terminals output easy to read. Open source.",
+  "homepage_url": "https://github.com/ericksprengel/ansi-formatter",
   "minimum_chrome_version": "21",
   "icons": {
        "128": "icons/128.png",
