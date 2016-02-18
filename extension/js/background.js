@@ -79,12 +79,13 @@
   // Listen for requests from content pages wanting to set up a port
     chrome.extension.onConnect.addListener(function(port) {
 
-      if (port.name !== 'jf') {
+      if (port.name !== 'af') {
         console.log('JSON ANSI error - unknown port name '+port.name, port) ;
         return ;
       }
 
       port.onMessage.addListener(function(msg) {
+        console.log('Receiving message: '+ msg.type) ;
         var jsonpFunctionName = null,
             validJsonText
         ;

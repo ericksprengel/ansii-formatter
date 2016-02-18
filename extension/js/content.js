@@ -49,9 +49,9 @@
       displayedFormattedJsonTime
   ;
   
-  // Open the port "jf" now, ready for when we need it
+  // Open the port "af" now, ready for when we need it
     console.time('established port') ;
-    port = chrome.extension.connect({name: 'jf'}) ;
+    port = chrome.extension.connect({name: 'af'}) ;
     
   // Add listener to receive response from BG when ready
     port.onMessage.addListener( function (msg) {
@@ -185,14 +185,6 @@
             // console.log('JSON detected and formatted in ' + ( displayedFormattedJsonTime - domReadyTime ) + ' ms') ;
             // console.markTimeline('JSON formatted and displayed') ;
 
-          // Export parsed JSON for easy access in console
-            setTimeout(function () {
-              var script = document.createElement("script") ;
-              script.innerHTML = 'window.json = ' + msg[2] + ';' ;
-              document.head.appendChild(script) ;
-              console.log('JSON Formatter: Type "json" to inspect.') ;
-            }, 100) ;
-
           break ;
         
         default :
@@ -211,12 +203,16 @@
       var bodyChildren = document.body.childNodes ;
       pre = bodyChildren[0] ;
       var jsonLength = (pre && pre.innerText || "").length ;
+      console.log(bodyChildren);
+      console.log(bodyChildren.length !== 1);
+      console.log(pre.tagName !== 'PRE');
+      console.log(jsonLength > (3000000));
       if (
         bodyChildren.length !== 1 ||
         pre.tagName !== 'PRE' ||
         jsonLength > (3000000) ) {
 
-        // console.log('Not even text (or longer than 3MB); exiting') ;
+        console.log('Not even text (or longer than 3MB); exiting') ;
         // console.log(bodyChildren.length,pre.tagName, pre.innerText.length) ;
 
         // Disconnect the port (without even having used it)
@@ -230,7 +226,7 @@
         
         // Hide the PRE immediately (until we know what to do, to prevent FOUC)
           pre.hidden = true ;
-          //console.log('It is text; hidden pre at ') ;
+          console.log('It is text; hidden pre at ') ;
           slowAnalysisTimeout = setTimeout(function(){
             pre.hidden = false ;
           }, 1000) ;
